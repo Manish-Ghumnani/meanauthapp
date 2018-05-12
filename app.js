@@ -33,6 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 //body parser midleware for json processing
 app.use(bodyParser.json());
 
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
 const users = require('./routes/users');
 
 //port number to use
