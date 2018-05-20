@@ -47,8 +47,14 @@ const port = 3000;
 
 app.use('/users', users);
 
+//Index Route
 app.get('/', (req, res) => {
     res.send('Invalid Endpoint');
+});
+
+//every route other than that specified should go to index.html
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.listen(port, () => {
