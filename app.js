@@ -42,8 +42,8 @@ require('./config/passport')(passport);
 const users = require('./routes/users');
 
 //port number to use
-const port = 3000;
-
+//const port = 3000;
+const port = process.env.PORT || 8080;
 
 app.use('/users', users);
 
