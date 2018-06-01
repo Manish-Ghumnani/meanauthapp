@@ -1,6 +1,14 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+//to push local changes to heroku
+const cool = require('cool-ascii-faces');
+//port number to use
+//const port = 3000;
+const PORT = process.env.PORT || 8080;
+
+
+
 
 //cors allow request to our api from a different domain name
 const cors = require('cors');
@@ -41,9 +49,6 @@ require('./config/passport')(passport);
 
 const users = require('./routes/users');
 
-//port number to use
-//const port = 3000;
-const port = process.env.PORT || 8080;
 
 app.use('/users', users);
 
@@ -57,6 +62,11 @@ app.get('*', (req,res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-app.listen(port, () => {
-    console.log('Server starte on port ' +port)
-});
+//a route to cool 
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .get('/cool', (req, res) => res.send(cool()))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
