@@ -15,6 +15,6 @@
 ## Screen shot(s)
 
 ### Home Screen
-![alt text](/screens/mean_capture.png "Home")
+![alt text](/screens/mean_capture.PNG "Home")
 
 [Demo Link](https://powerful-anchorage-21134.herokuapp.com/)
