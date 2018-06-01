@@ -5,10 +5,14 @@ const bodyParser = require('body-parser');
 const cool = require('cool-ascii-faces');
 //port number to use
 //const port = 3000;
-const PORT = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 
-
+//a route to cool 
+// express().get('/cool', (req, res) => res.send(cool()));
+//   use(express.static(path.join(__dirname, 'public')))
+  
+  //.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 //cors allow request to our api from a different domain name
 const cors = require('cors');
@@ -36,7 +40,11 @@ const app = express();
 app.use(cors());
 
 //Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')))
+   .set('views', path.join(__dirname, 'views'))
+   .set('view engine', 'ejs')
+   .get('/', (req, res) => res.render('pages/index'))
+   .get('/cool', (req, res) => res.send(cool()));
 
 //body parser midleware for json processing
 app.use(bodyParser.json());
@@ -62,11 +70,6 @@ app.get('*', (req,res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-//a route to cool 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .get('/cool', (req, res) => res.send(cool()))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen(port, () => {
+    console.log('Server starte on port ' +port)
+});
