@@ -624,11 +624,12 @@ var RegisterComponent = /** @class */ (function () {
     };
     RegisterComponent.prototype.onRegisterSubmit = function () {
         var _this = this;
-        console.log(this.name);
+        console.log(this.username);
+        console.log(this.email);
         var user = {
             name: this.name,
             email: this.email,
-            username: this.email,
+            username: this.username,
             password: this.password
         };
         //Required Fields
